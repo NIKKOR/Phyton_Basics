@@ -47,10 +47,10 @@ print(b | d)
 print(b & d)
 
 # s.difference(t, …)	s - t
-print(d - b)
+print(1, d - b)
 
 # s.symmetric_difference(t)	s ^ t
-print(d ^ b)
+print(2, d ^ b)
 
 # s.copy()	
 f = e
