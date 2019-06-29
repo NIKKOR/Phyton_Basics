@@ -6,26 +6,93 @@
 # но только если результаты извлечения корня не имеют десятичной части и
 # если такой корень вообще можно извлечь
 # Пример: Дано: [2, -5, 8, 9, -25, 25, 4]   Результат: [3, 5, 2]
-from typing import List
+import math
 
-listInput = []  # type: List[str]
+error = 0
+listInput = []
 while True:
-    listInput.append(raw_input('Вводите элементы списка. Когда закончите, введите в поле ввода "EXIT"\n'))
-    listInput[-1] = int(listInput[-1]) if isinstance(listInput[-1, int]) else listInput[-1] = str(listInput[-1])
-    if listInput[-1] == 'EXIT':
-        listInput.pop()
-        print ('Ваш список: {0}'.format(str(listInput)))
+    listInput.append(input('Вводите элементы списка. Когда закончите, введите в поле ввода "EXIT"\n'))
+    if listInput[-1] == 'EXIT':  # проверка на ключевое слово EXIT
+        listInput.pop()  # убираем EXIT из списка
+        print('Ваш список: ', listInput)  # выводим данный список
+        break  # выходим из бесконечного цикла (приходится так делать, ведь do-while в phyton нет(((
+    elif not listInput[-1].isalpha():  # преобразуем строку в число для дальнейших математических операций
+        # (введённые числа преобразуются в строку с помощью input)
+        listInput[-1] = int(listInput[-1])  #
+    else:
+        print('Можно вводить только целые числа')
+        error = 1
         break
+listInputSQRT = []
+# думал, что так получится короче, но оказалось только сложнее:
+'''
+for i in listInput: 
+    if listInput[listInput.index(i)] > 0:
+        if math.sqrt(listInput[listInput.index(i)]) % 1 == 0:
+            listInputSQRT.append(int(math.sqrt(listInput[listInput.index(i)])))
+            '''
+#  пока писал это, подумал, как было бы удобно написать это на C++ с помощью for:
+'''
+i = 0
+while i < len(listInput):  # 
+    if listInput[i] > 0 and math.sqrt(listInput[i]) % 1 == 0:  # корни должны извлекаться только из
+        # неотрицательных чисел и являться целыми числами
+        listInputSQRT.append(int(math.sqrt(listInput[i])))
+    i += 1
+'''
+#  аналог цикла for из C++:
+
+for i in range(0, (len(listInput))):
+    if listInput[i] > 0 and math.sqrt(listInput[i]) % 1 == 0:  # корни должны извлекаться только из
+        # неотрицательных чисел и являться целыми числами
+        listInputSQRT.append(int(math.sqrt(listInput[i])))
+if error == 0:
+    print("Ваш список с хорошими корнями: ", listInputSQRT)
 
 # Задача-2: Дана дата в формате dd.mm.yyyy, например: 02.11.2013.
 # Ваша задача вывести дату в текстовом виде, например: второе ноября 2013 года.
 # Склонением пренебречь (2000 года, 2010 года)
 
+dmy = input("Введите дату в формате dd.mm.yyyy\n")  # 26.08.2003
+dmy_list = []
+for i in range(0, 10):
+    if dmy[i] != ".":
+        dmy_list.append(dmy[i])
+
+d_dict_0 = {'1': 'первое', '2': 'второе', '3': 'третье',
+            '4': 'четвёртое', '5': 'пятое', '6': 'шестое', '7': 'седьмое', '8': 'восьмое', '9': 'девятое'}
+d_dict_10 = {'0': 'десятое', '1': 'одиннадцатое', '2': 'двенадцатое',
+             '3': 'тринадцатое', '4': 'четырнадцатое', '5': 'пятнадцатое', '6': 'шестнадцатое',
+             '7': 'семнадцатое', '8': 'восемнадцатое', '9': 'девятнадцатое'}
+m_dict = {'01': 'января', '02': 'февраля', '03': 'марта', '04': 'апреля', '05': 'мая', '06': 'июня', '07': 'июля'
+          , '08': 'августа', '09': 'сентября', '10': 'октября', '11': 'ноября', '12': 'декабря'}
+
+if dmy_list[0] == '0':
+        d = d_dict_0[dmy_list[1]]
+elif dmy_list[0] == '1':
+        d = d_dict_10[dmy_list[1]]
+elif dmy_list[0] == '2':
+    if dmy_list[1] != '0':
+        d = 'двадцать ' + str(d_dict_0[dmy_list[1]])
+    else:
+        d = 'двадцатое'
+elif dmy_list[0] == '3':
+    if dmy_list[1] != '0':
+        d = 'тридцать' + str(d_dict_0[dmy_list[1]])
+    else:
+        d = 'тридцатое'
+
+m = m_dict[dmy_list[2] + dmy_list[3]]
+
+y = (dmy_list[4] + dmy_list[5] + dmy_list[6] + dmy_list[7]) + ' года'
+
+print(d, m, y)
 
 # Задача-3: Напишите алгоритм, заполняющий список произвольными целыми числами
 # в диапазоне от -100 до 100. В списке должно быть n - элементов.
 # Подсказка:
 # для получения случайного числа используйте функцию randint() модуля random
+
 
 
 # Задача-4: Дан список, заполненный произвольными целыми числами.
