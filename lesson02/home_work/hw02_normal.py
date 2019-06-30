@@ -111,3 +111,25 @@ print(random_list)
 # например, lst = [1, 2, 4, 5, 6, 2, 5, 2], нужно получить lst2 = [1, 2, 4, 5, 6]
 # б) элементы исходного списка, которые не имеют повторений:
 # например, lst = [1 , 2, 4, 5, 6, 2, 5, 2], нужно получить lst2 = [1, 4, 6]
+
+list_4 = []
+input_infinity_list(list_4, 'EXIT')
+
+list_4_a = []
+list_4_a_exceptions = []
+for i in range(0, len(list_4)):
+    if list_4[i] not in list_4_a:
+        list_4_a.append(list_4[i])
+    else:
+        list_4_a_exceptions.append(list_4[i])
+list_4_a_exceptions = sorted(set(list_4_a_exceptions))
+print(list_4_a_exceptions)
+list_4_a_text = 'а) Ваш список с неповторяющимися элементми исходного списка: ' + str(list_4_a)
+
+list_4_b = []
+for i in range(0, len(list_4)):
+    if list_4[i] not in list_4_a_exceptions:
+        list_4_b.append(list_4[i])
+list_4_b_text = 'б) Ваш список с элементми исходного списка, которые не имеют повторений: ' + str(list_4_b)
+
+print(list_4_a_text + '\n' + list_4_b_text)
