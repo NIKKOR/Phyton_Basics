@@ -1,6 +1,5 @@
-import os
-from shutil import copyfile
-import sys
+import os, sys, content_dir, shutil, item_path
+
 
 # Задача-1:
 # Напишите скрипт, создающий директории dir_1 - dir_9 в папке,
@@ -28,24 +27,14 @@ rmdir_name_x_to_y('dir_', 1, 9)
 # Задача-2:
 # Напишите скрипт, отображающий папки текущей директории.
 
-def item_path(item):
-    return os.path.join(os.getcwd(), item)
-
-
 try:
     mkdir_name_x_to_y('dir_', 1, 9)
-
-    dir_path_2 = os.listdir(os.getcwd())
-    print('\n{0:.^50}'.format('Папки текущей директории:') +
-          '\n{0}{1:.>38}'.format('Имя папки:', 'Путь к папке:'))
-    for i in dir_path_2:
-        extra_path = '({})'.format(item_path(i))
-        if os.path.isdir(item_path(i)):
-            print(i, '{:.>100}'.format(extra_path))
+    content_dir.do()
 finally:
     rmdir_name_x_to_y('dir_', 1, 9)
 
 # Задача-3:
 # Напишите скрипт, создающий копию файла, из которого запущен данный скрипт.
-item_name = str(os.path.basename(sys.argv[0]))[:-3]
-copyfile(item_path(item_name + '.py'), item_path(item_name + '_copy.py'))
+
+item_name=str(os.path.basename(sys.argv[0]))[:-3]
+shutil.copyfile(item_path.do(item_name + '.py'), item_path.do(item_name + '_copy.py'))
