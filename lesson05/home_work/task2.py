@@ -9,7 +9,7 @@ def item_path(item):
 
 
 try:
-    task1.mkdir_x_to_y(1, 9)
+    task1.mkdir_name_x_to_y('dir_', 1, 9)
 
     dir_path_2 = os.listdir(os.getcwd())
     print('\n{0:.^50}'.format('Папки текущей директории:') +
@@ -19,4 +19,4 @@ try:
         if os.path.isdir(item_path(i)):
             print(i, '{:.>100}'.format(extra_path))
 finally:
-    task1.rmdir_x_to_y(1, 9)
+    task1.rmdir_name_x_to_y('dir_', 1, 9)
