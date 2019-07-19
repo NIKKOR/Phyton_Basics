@@ -57,3 +57,37 @@
 модуль random: http://docs.python.org/3/library/random.html
 
 """
+
+import random
+
+ran_nums_base = sorted(random.sample(range(1, 90), 5))\
+                + sorted(random.sample(range(1, 90), 5))\
+                + sorted(random.sample(range(1, 90), 5))
+print(ran_nums_base)
+
+def get_ran_index_row(rows: int = 1):
+    random_index_row = []
+    for _ in range(0, rows):
+        random_index_row.append(sorted(random.sample(range(0, 8), 5)))
+    return random_index_row
+
+class Row:
+    def __init__(self, order: int = 1):
+        self.order = order
+        self.row = ["_" for _ in range(0, 9)]
+        ran_nums_base_index = 5 * (order - 1)
+        ran_index_row_temp = get_ran_index_row(order)[order-1]
+        for index_range in range(0, 9):
+            if index_range in ran_index_row_temp:
+                self.row[index_range] = ran_nums_base[ran_nums_base_index]
+                ran_nums_base_index += 1
+
+    def __str__(self):
+        return f'{self.row}'
+
+
+print(get_ran_index_row())
+a = Row(1)
+b = Row(2)
+c = Row(3)
+print(f'{a} \n{b} \n{c}')
