@@ -60,42 +60,57 @@
 
 import random
 
-ran_nums_base = sorted(random.sample(range(1, 90), 5))\
-                + sorted(random.sample(range(1, 90), 5))\
+ran_nums_base = sorted(random.sample(range(1, 90), 5)) \
+                + sorted(random.sample(range(1, 90), 5)) \
                 + sorted(random.sample(range(1, 90), 5))
-print(ran_nums_base)
+
+
+def get_ran_nums_base():
+    return sorted(random.sample(range(1, 90), 5)) \
+           + sorted(random.sample(range(1, 90), 5)) \
+           + sorted(random.sample(range(1, 90), 5))
+
 
 def get_ran_index_row(rows: int = 1):
     random_index_row = []
     for _ in range(0, rows):
-        random_index_row.append(sorted(random.sample(range(0, 8), 5)))
+        random_index_row.append(sorted(random.sample(range(0, 9), 5)))
     return random_index_row
+
 
 class Row:
     def __init__(self, order: int = 1, property: str = 'Human'):
         self.order = order
         self.row = ["_" for _ in range(0, 9)]
         self.ran_nums_base_index = 5 * (order - 1)
-        self.ran_index_row_temp = get_ran_index_row(order)[order-1]
+        self.ran_index_row_temp = get_ran_index_row(order)[order - 1]
+        ran_nums_base_tmp = get_ran_nums_base()
         for index_range in range(0, 9):
             if index_range in self.ran_index_row_temp:
-                self.row[index_range] = ran_nums_base[self.ran_nums_base_index]
+                self.row[index_range] = ran_nums_base_tmp[self.ran_nums_base_index]
                 self.ran_nums_base_index += 1
         self.row_str = ''
         for el in self.row:
             self.row_str += str(el) + ' '
 
-        self.row =
     def __str__(self):
         return f'{str(self.row_str)}'
 
+
 class Card:
-    def __init__(self, property):
-        print('{1:.^100'.format('Ваша карточка'))
-        print(f'{Row(1)} \n{2} \n{3}')
+    def __init__(self, property: str = 'Human'):
+        self.first = str(Row(1))
+        self.second = str(Row(2))
+        self.third = str(Row(3))
+        rows_data = f'{Row(1)}\n{Row(2)}\n{Row(3)}'
+        print('{0:.^25}'.format('Ваша карточка' if property == 'Human'
+                                else 'Карточка компьютера'))
+        print(rows_data)
+        print('{0:.^25}\n'.format(''))
 
-print(get_ran_index_row())
-a = Row(2)
-b = Row(2)
-print(f'{a}\n{b}')
+a = Card('Human')
+b = Card('Computer')
 
+digits_base = [i for i in range(1, 91)]
+
+queue = []
