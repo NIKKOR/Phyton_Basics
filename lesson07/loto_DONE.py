@@ -129,7 +129,7 @@ human_count = 0
 computer_count = 0
 nums_count = 90
 queue = 0
-debug_mode = 1
+debug_mode = 0
 first_el_check_human = 0
 first_el_check_computer = 0
 while quit_check == 0:
